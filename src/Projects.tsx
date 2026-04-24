@@ -24,7 +24,6 @@ const Projects = () => {
       document.removeEventListener("visibilitychange", handleVisibilityChange);
   }, []);
 
-  // Final Play State: Stop if scrolled away OR if tab is backgrounded
   const isMoving = isInView && isTabActive;
 
   // Split projects into two halves for two different rows
@@ -122,7 +121,7 @@ const Projects = () => {
         <div className="flex overflow-visible mask-horizontal">
           <motion.div
             className="flex gap-8 px-4 will-change-transform"
-            // If not isMoving, we stop the animation
+            // If not isMovingRow1, we stop the animation
             animate={isMoving ? { x: ["0%", "-50%"] } : {}}
             transition={{
               duration: 40,
@@ -131,12 +130,13 @@ const Projects = () => {
             }}
           >
             {row1.map((project, index) => (
-              <div
+              <motion.div
+                
                 key={`row1-${index}`}
                 className="w-[300px] md:w-[450px] shrink-0"
               >
                 <MemoizedGlassCard {...project} />
-              </div>
+              </motion.div>
             ))}
           </motion.div>
         </div>
@@ -153,12 +153,13 @@ const Projects = () => {
             }}
           >
             {row2.map((project, index) => (
-              <div
+              <motion.div
+                
                 key={`row2-${index}`}
                 className="w-[300px] md:w-[450px] shrink-0"
               >
                 <MemoizedGlassCard {...project} />
-              </div>
+              </motion.div>
             ))}
           </motion.div>
         </div>

@@ -4,6 +4,7 @@ import Home from "./Home";
 import Projects from "./Projects";
 import About from "./About";
 import { Route, Routes, useLocation } from "react-router-dom";
+import { useState } from "react";
 
 const routes = [
   { path: "/", component: <Home /> },
@@ -12,6 +13,7 @@ const routes = [
 ];
 
 function App() {
+  const [isMobile] = useState(window.innerWidth < 640);
   const location = useLocation();
 
   const getPositionClass = () => {
@@ -41,18 +43,20 @@ function App() {
   return (
     <main className="bg-black text-white selection:bg-purple-500 min-h-screen overflow-x-hidden">
       {/* 3D BACKGROUND LAYER */}
-      <div className="fixed inset-0 z-0 pointer-events-none flex items-end justify-center">
-        <div className={`w-full lg:h-full h-[65%]   ${getPositionClass()}`}>
-          {/* 
+      {!isMobile && (
+        <div className="fixed inset-0 z-0 pointer-events-none  items-end justify-center hidden sm:flex">
+          <div className={`w-full lg:h-full h-[65%]   ${getPositionClass()}`}>
+            {/* 
             We use h-[100%] but inside a flex items-end container. 
             If the robot is still cropping, change h-full to h-[120vh] 
             to give the 3D camera more vertical room.
           */}
-          <div className="w-full h-full pointer-events-auto">
-            <Spline scene="https://prod.spline.design/1Wi4kkJ3uS6K3OMt/scene.splinecode" />
+            <div className="w-full h-full pointer-events-auto">
+              <Spline scene="https://prod.spline.design/1Wi4kkJ3uS6K3OMt/scene.splinecode" />
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       {/* UI LAYER */}
       <Navbar />

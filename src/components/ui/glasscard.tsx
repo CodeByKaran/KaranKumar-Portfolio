@@ -74,10 +74,11 @@ const GlassCard = ({
                 target="_blank"
               >
                 <img
-                  width="18"
-                  height="18"
+                  width="20"
+                  height="20"
                   src="https://img.icons8.com/glyph-neue/64/github.png"
                   alt="github"
+                  className="invert-100"
                 />
               </a>
             )}
